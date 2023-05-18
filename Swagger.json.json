@@ -1,0 +1,138 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "title": "PokeApi Documentation",
+    "description": "Simple documentation and example for the developed Pokémon rest API, bringing the main attributes and characteristics of the characters included in the franchise",
+    "contact": {
+      "email": "enzokauarosantos07@gmail.com"
+    },
+    "version": "0.0.2"
+  },
+  "servers": [
+    {
+      "url": "https://virtserver.swaggerhub.com/ENZOKAUAROSANTOS07_1/PokeAPI/1.0.0",
+      "description": "SwaggerHub API Auto Mocking"
+    }
+  ],
+  "paths": {
+    "/abilities": {
+      "get": {
+        "tags": [
+          "Get Method"
+        ],
+        "summary": "Abilities for PokeApi",
+        "description": "abilities or pokemons\n",
+        "operationId": "getTypes",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "description": "type of atribute",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "Name for movement",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "image",
+            "in": "query",
+            "description": "image for movement pokemon",
+            "required": true,
+            "style": "form",
+            "explode": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "search results for api",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/lib"
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "bad input parameter"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "admins"
+        ],
+        "summary": "adds an type for api",
+        "description": "Adds an types, moves and abilities to the system",
+        "operationId": "addInventory",
+        "requestBody": {
+          "description": "Lib to add",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/lib"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "type created"
+          },
+          "400": {
+            "description": "invalid input, object invalid"
+          },
+          "409": {
+            "description": "an existing item already exists"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "lib": {
+        "required": [
+          "name",
+          "type",
+          "url"
+        ],
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "example": "abilities"
+          },
+          "name": {
+            "type": "string",
+            "example": "overgrow"
+          },
+          "image": {
+            "type": "string",
+            "format": "url",
+            "example": "https://pokeapi.co/api/v2/ability/65/"
+          }
+        }
+      }
+    }
+  }
+}
